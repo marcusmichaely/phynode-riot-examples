@@ -25,12 +25,14 @@ USEMODULE += ps
 
 FEATURES_REQUIRED = periph_i2c
 
-USEMODULE += vtimer
+USEMODULE += xtimer
 USEMODULE += hdc1000
 USEMODULE += tmp006
 USEMODULE += mpl3115a2
 USEMODULE += mag3110
 USEMODULE += mma8652
+USEMODULE += mma8652
+USEMODULE += tcs37727
 
 # Comment this out to disable code in RIOT that does safety checking
 # which is not needed in a production environment but helps in the

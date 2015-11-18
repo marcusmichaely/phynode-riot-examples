@@ -34,6 +34,7 @@
 #include "mpl3115a2.h"
 #include "mag3110.h"
 #include "mma8652.h"
+#include "tcs37727.h"
 #include "periph_conf.h"
 #include "periph/gpio.h"
 
@@ -55,12 +56,15 @@ static tmp006_t tmp006_dev;
 static mpl3115a2_t mpl3115a2_dev;
 static mag3110_t mag3110_dev;
 static mma8652_t mma8652_dev;
+static tcs37727_t tcs37727_dev;
+static tcs37727_data_t tcs37727_data;
 
 int temp, hum;
 float tamb, tobj;
 uint32_t pressure;
 int16_t m_x, m_y, m_z;
 int16_t a_x, a_y, a_z;
+uint32_t ct, lux;
 
 static char sensor_server_stack_buffer[512];
 
@@ -100,6 +104,15 @@ void sensors_init(void)
             sensor_stat &= ~SENSOR_ENABLED_MMA8652;
         }
     }
+
+    if (tcs37727_init(&tcs37727_dev, I2C_0, 0x29,
+                      TCS37727_ATIME_DEFAULT) == 0) {
+        sensor_stat |= SENSOR_ENABLED_TCS37727;
+        if (tcs37727_set_rgbc_active(&tcs37727_dev)) {
+            sensor_stat &= ~SENSOR_ENABLED_TCS37727;
+        }
+    }
+
     printf("Sensor status: 0x%x\n", sensor_stat);
 }
 
@@ -153,6 +166,11 @@ static void *sensor_server(void *arg)
             mma8652_read(&mma8652_dev, &a_x, &a_y, &a_z, &status);
         }
 
+        if (sensor_stat & SENSOR_ENABLED_TCS37727) {
+            tcs37727_read(&tcs37727_dev, &tcs37727_data);
+            ct = tcs37727_data.ct;
+            lux = tcs37727_data.lux;
+        }
         xtimer_usleep(1*1000000);
     }
 

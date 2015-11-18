@@ -46,6 +46,7 @@ extern float tamb, tobj;
 extern uint32_t pressure;
 extern int16_t m_x, m_y, m_z;
 extern int16_t a_x, a_y, a_z;
+extern uint32_t ct, lux;
 
 static void *_server_thread(void *args)
 {
@@ -119,6 +120,9 @@ static void *_server_thread(void *args)
             } else if (strstr(udp_buf, "get:tmp006") != NULL) {
                 snprintf(udp_buf, UDP_BUF_SIZE, "tamb:%d,tobj:%d\n",
                          (int)(tamb*100), (int)(tobj*100));
+            } else if (strstr(udp_buf, "get:tcs37727") != NULL) {
+                snprintf(udp_buf, UDP_BUF_SIZE, "ct:%d,lux:%d\n",
+                         (int)ct, (int)lux);
             } else if (strstr(udp_buf, "set:rled,val:0") != NULL ||
 	    		(strstr(udp_buf, "set:rled,val:00") != NULL)) {
 	    	LED_R_OFF;
