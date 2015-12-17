@@ -184,7 +184,7 @@ int main(void)
     thread_create(sensor_server_stack_buffer,
                   sizeof(sensor_server_stack_buffer),
                   THREAD_PRIORITY_MAIN - 1,
-                  CREATE_STACKTEST,
+                  THREAD_CREATE_STACKTEST,
                   sensor_server,
                   NULL,
                   "sensor server");
