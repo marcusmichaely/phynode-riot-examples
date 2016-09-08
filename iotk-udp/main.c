@@ -123,13 +123,13 @@ static void *sensor_server(void *arg)
 
     sensors_init();
 
-    LED_G_ON;
-    LED_B_ON;
-    LED_R_ON;
+    LED0_ON;
+    LED1_ON;
+    LED2_ON;
     xtimer_usleep(100000);
-    LED_G_OFF;
-    LED_B_OFF;
-    LED_R_OFF;
+    LED0_OFF;
+    LED1_OFF;
+    LED2_OFF;
 
     while (1) {
         if (sensor_stat & SENSOR_ENABLED_HDC1000) {

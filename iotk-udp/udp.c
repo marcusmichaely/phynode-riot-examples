@@ -126,25 +126,25 @@ static void *_server_thread(void *args)
                          (int)ct, (int)lux);
             } else if (strstr(udp_buf, "set:rled,val:0") != NULL ||
 	    		(strstr(udp_buf, "set:rled,val:00") != NULL)) {
-	    	LED_R_OFF;
-	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED_R_OFF\n");
+	    	LED0_OFF;
+	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED0_OFF (red)\n");
             } else if (strstr(udp_buf, "set:rled,val:") != NULL) {
-	    	LED_R_ON;
-	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED_R_ON\n");
+	    	LED0_ON;
+	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED0_ON (red)\n");
             } else if (strstr(udp_buf, "set:gled,val:0") != NULL ||
 	    		(strstr(udp_buf, "set:gled,val:00") != NULL)) {
-	    	LED_G_OFF;
-	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED_G_OFF\n");
+	    	LED1_OFF;
+	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED1_OFF (green)\n");
             } else if (strstr(udp_buf, "set:gled,val:") != NULL) {
-	    	LED_G_ON;
-	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED_G_ON\n");
+	    	LED1_ON;
+	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED1_ON (green)\n");
             } else if (strstr(udp_buf, "set:bled,val:0") != NULL ||
 	    		(strstr(udp_buf, "set:bled,val:00") != NULL)) {
-	    	LED_B_OFF;
-	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED_B_OFF\n");
+	    	LED2_OFF;
+	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED2_OFF (blue)\n");
             } else if (strstr(udp_buf, "set:bled,val:") != NULL) {
-	    	LED_B_ON;
-	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED_B_ON\n");
+	    	LED2_ON;
+	    	snprintf(udp_buf, UDP_BUF_SIZE, "LED2_ON (blue)\n");
             } else {
                 continue;
             }
